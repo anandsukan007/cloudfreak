@@ -5,23 +5,21 @@ pipeline {
                  jdk 'JAVA_HOME'
     }
     stages {      
-        /*stage('Build maven ') {
+        stage('Build maven ') {
             steps { 
                     sh 'pwd'      
                     sh 'mvn  clean install package'
             }
-        }*/
+        }
 	    
-	stage('build && SonarQube analysis') {
+	stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonar6') {
-                    // Optionally use a Maven environment you've configured already
-                    withMaven(maven:'maven') {
-                        sh 'mvn clean package sonar:sonar'
+                     sh 'mvn sonar:sonar'
                     }
                 }
             }
-        }    
+        /*   
         
         stage('Copy Artifact') {
            steps { 
@@ -39,6 +37,6 @@ pipeline {
                  }                     
            }
         }
-	  }
+	  }*/
     }
 }
