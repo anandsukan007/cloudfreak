@@ -4,8 +4,8 @@ pipeline {
       maven 'maven'
                  jdk 'JAVA_HOME'
     }
-    /*stages {      
-        stage('Build maven ') {
+    stages {      
+        /*stage('Build maven ') {
             steps { 
                     sh 'pwd'      
                     sh 'mvn  clean install package'
