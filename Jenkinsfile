@@ -4,13 +4,24 @@ pipeline {
       maven 'maven'
                  jdk 'JAVA_HOME'
     }
-    stages {      
+    /*stages {      
         stage('Build maven ') {
             steps { 
                     sh 'pwd'      
                     sh 'mvn  clean install package'
             }
-        }
+        }*/
+	    
+	stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'maven') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }    
         
         stage('Copy Artifact') {
            steps { 
