@@ -1,8 +1,8 @@
 pipeline {
   agent any
     tools {
-      maven 'maven'
-                 jdk 'JAVA_HOME'
+      maven 'maven3'
+                 jdk 'JDK8'
     }
     stages {      
         stage('Build maven ') {
@@ -12,7 +12,7 @@ pipeline {
             }
         }
 	    
-	stage('SonarQube analysis') {
+	/*stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonar6') {
                      sh 'mvn sonar:sonar'
@@ -27,9 +27,8 @@ pipeline {
       error "Pipeline aborted due to quality gate failure: ${qg.status}"
     }
   }
-}  
-        /*   
-        
+}  */
+                
         stage('Copy Artifact') {
            steps { 
                    sh 'pwd'
@@ -46,6 +45,6 @@ pipeline {
                  }                     
            }
         }
-	  }*/
+	  }
     }
 }
